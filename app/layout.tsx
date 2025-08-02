@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 
+import { ThemeProvider } from "@/components/providers/theme-provider";
 import { geistMono, geistSans } from "@/lib/fonts";
+import { TRPCReactProvider } from "@/trpc/react";
 
 import "@/styles/globals.css";
-
-import { ThemeProvider } from "@/components/providers/theme-provider";
 
 export const metadata: Metadata = {
 	title: "Create Next App",
@@ -23,14 +23,16 @@ export default function RootLayout({
 			suppressHydrationWarning
 		>
 			<body>
-				<ThemeProvider
-					attribute="class"
-					defaultTheme="system"
-					enableSystem
-					disableTransitionOnChange
-				>
-					{children}
-				</ThemeProvider>
+				<TRPCReactProvider>
+					<ThemeProvider
+						attribute="class"
+						defaultTheme="system"
+						enableSystem
+						disableTransitionOnChange
+					>
+						{children}
+					</ThemeProvider>
+				</TRPCReactProvider>
 			</body>
 		</html>
 	);
