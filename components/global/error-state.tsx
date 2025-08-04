@@ -17,14 +17,18 @@ import { Button } from "@/components/ui/button";
 export const ErrorState = ({
 	error,
 	resetAction,
+	resetErrorBoundaryAction,
 }: {
 	error?: Error & { digest?: string };
 	resetAction?: () => void;
+	resetErrorBoundaryAction?: (...args: unknown[]) => void;
 }) => {
 	const isDev = process.env.NODE_ENV !== "production";
 
 	useEffect(() => {
-		console.error(error);
+		if (error) {
+			console.error(error);
+		}
 	}, [error]);
 
 	return (
@@ -40,6 +44,12 @@ export const ErrorState = ({
 
 				<div className="mt-4 space-y-4">
 					{resetAction && (
+						<Button className="w-full" onClick={resetAction}>
+							<RefreshCcwIcon className="size-4" />
+							Try again
+						</Button>
+					)}
+					{resetErrorBoundaryAction && (
 						<Button className="w-full" onClick={resetAction}>
 							<RefreshCcwIcon className="size-4" />
 							Try again
