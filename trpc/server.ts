@@ -3,9 +3,9 @@ import "server-only";
 import { cache } from "react";
 import { headers } from "next/headers";
 
-import { createHydrationHelpers } from "@trpc/react-query/rsc";
+import { createTRPCOptionsProxy } from "@trpc/tanstack-react-query";
 
-import { createCaller, type AppRouter } from "@/server/api/root";
+import { appRouter } from "@/server/api/root";
 import { createTRPCContext } from "@/server/api/trpc";
 import { createQueryClient } from "@/trpc/query-client";
 
@@ -22,10 +22,10 @@ const createContext = cache(async () => {
 	});
 });
 
-const getQueryClient = cache(createQueryClient);
-const caller = createCaller(createContext);
+export const getQueryClient = cache(createQueryClient);
 
-export const { trpc: api, HydrateClient } = createHydrationHelpers<AppRouter>(
-	caller,
-	getQueryClient
-);
+export const trpc = createTRPCOptionsProxy({
+	ctx: createContext,
+	router: appRouter,
+	queryClient: getQueryClient,
+});

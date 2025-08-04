@@ -2,24 +2,34 @@
 
 import { useState } from "react";
 
-import { useSuspenseQuery } from "@tanstack/react-query";
+import {
+	useMutation,
+	useQueryClient,
+	useSuspenseQuery,
+} from "@tanstack/react-query";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { api } from "@/trpc/react";
+import { useTRPC } from "@/trpc/react";
 
 export const LatestPost = () => {
 	const [name, setName] = useState<string>("");
 
-	const utils = api.useUtils();
-	const { data } = useSuspenseQuery(utils.posts.getLatest.queryOptions());
+	const trpc = useTRPC();
+	const queryClient = useQueryClient();
 
-	const createPost = api.posts.create.useMutation({
-		onSuccess: async () => {
-			await utils.posts.invalidate();
-			setName("");
-		},
-	});
+	const { data } = useSuspenseQuery(trpc.posts.getLatest.queryOptions());
+
+	const postsQueryQey = trpc.posts.getLatest.queryKey();
+
+	const createPost = useMutation(
+		trpc.posts.create.mutationOptions({
+			onSuccess: async () => {
+				await queryClient.invalidateQueries({ queryKey: postsQueryQey });
+				setName("");
+			},
+		})
+	);
 
 	const [latestPost] = data;
 
