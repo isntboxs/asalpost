@@ -54,9 +54,7 @@
     "@radix-ui/react-tooltip": "^1.2.7",
     "@t3-oss/env-nextjs": "^0.13.8",
     "@tanstack/react-query": "^5.84.1",
-    "@tanstack/react-query-devtools": "^5.84.1",
     "@trpc/client": "^11.4.3",
-    "@trpc/react-query": "^11.4.3",
     "@trpc/server": "^11.4.3",
     "@trpc/tanstack-react-query": "^11.4.3",
     "better-auth": "^1.3.4",
@@ -82,13 +80,14 @@
     "superjson": "^2.2.2",
     "tailwind-merge": "^3.3.1",
     "vaul": "^1.1.2",
-    "zod": "^3.24.2"
+    "zod": "^4.0.14"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@ianvs/prettier-plugin-sort-imports": "^4.5.1",
     "@next/eslint-plugin-next": "^15.4.5",
     "@tailwindcss/postcss": "^4",
+    "@tanstack/react-query-devtools": "^5.84.1",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
