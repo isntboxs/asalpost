@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
 import { geistMono, geistSans } from "@/lib/fonts";
 import { TRPCReactProvider } from "@/trpc/react";
 
@@ -31,6 +32,7 @@ export default function RootLayout({
 						disableTransitionOnChange
 					>
 						{children}
+						<Toaster richColors position="top-center" />
 					</ThemeProvider>
 				</TRPCReactProvider>
 			</body>

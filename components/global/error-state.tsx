@@ -50,7 +50,7 @@ export const ErrorState = ({
 						</Button>
 					)}
 					{resetErrorBoundaryAction && (
-						<Button className="w-full" onClick={resetAction}>
+						<Button className="w-full" onClick={resetErrorBoundaryAction}>
 							<RefreshCcwIcon className="size-4" />
 							Try again
 						</Button>
